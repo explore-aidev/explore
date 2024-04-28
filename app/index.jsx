@@ -1,9 +1,16 @@
-import { View, Text, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../constants';
-import SlideItem from '../components/SlideItem';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { router } from 'expo-router';
 
 const sliderWith = Dimensions.get('window').width;
 const itemWidth = Math.round(sliderWith);
@@ -86,6 +93,43 @@ const index = () => {
             opacity: 0.4,
           }}
         />
+        {index === dataStart.length - 1 ? (
+          <View className="mt-16 px-10 items-center w-full justify-center">
+            <TouchableOpacity
+              className="bg-background justify-center items-center flex h-[56px] w-full rounded-[5px]"
+              onPress={() => {
+                router.push('/register');
+              }}
+            >
+              <Text className="font-pmedium text-white text-[16px]">
+                Explore
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View className="mt-16 px-10 flex-row justify-between w-full items-center">
+            <TouchableWithoutFeedback
+              onPress={() => {
+                isCarousel.current.snapToItem(dataStart.length - 1);
+              }}
+            >
+              <Text className="font-pmedium text-secondary text-[16px]">
+                Skip
+              </Text>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                isCarousel.current.snapToNext();
+              }}
+            >
+              <View className="bg-background justify-center items-center flex h-[56px] w-[158px] rounded-[5px]">
+                <Text className="font-pmedium text-white text-[16px]">
+                  Next
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        )}
       </View>
     </View>
   );

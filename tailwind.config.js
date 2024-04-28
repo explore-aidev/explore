@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         primary: '#0D0D26',
         secondary: '#95969D',
+        background: '#2C557D',
+        greyCustom: '#AFB0B6',
+        buttonColor: '#356899',
+        bgPage: '#FAFAFD',
       },
       fontFamily: {
         pthin: ['Poppins-Thin', 'sans-serif'],
